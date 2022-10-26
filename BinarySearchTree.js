@@ -1,5 +1,5 @@
 
-let LinkedList = require('./QueueLinkedList');
+/*let LinkedList = require('./QueueLinkedList');
 
 class Queue{
   constructor(){
@@ -15,7 +15,6 @@ class Queue{
     return this.list.removeFromFront();
   }
 }
-
 class Node{
   constructor(value){
     this.data = value;
@@ -140,3 +139,67 @@ class BinarySearchTree{
   }
 }
 let bst = new BinarySearchTree();
+
+bst.levelOrder()*/
+
+const QueueLinkedList = require('./QueueLinkedList')
+
+class Queue{
+  constructor(){
+    this.list = new QueueLinkedList();
+  }
+  Enqueue(value){
+    this.list.prepend(value);
+  }
+  Dequeue(){
+    this.list.removeFromFront();
+  }
+}
+
+class Node{
+  constructor(value){
+    this.data = value;
+    this.right = null;
+    this.left = null;
+  }
+}
+
+class BinarySearchTree{
+  constructor(){
+    this.root = null;
+    this.size = 0;
+  }
+  isEmpty(){return this.size === 0}
+  insert(value){
+    let node = new Node(value);
+    if(this.isEmpty()){
+      this.root = node;
+    }else{
+      this.insertNode(this.root, node)
+    }
+  }
+  insertNode(root, node){
+    if(node.data < root.data){
+      if(root.left == null){
+        root.left = node;
+      }else{
+        this.insertNode(root.left, node);
+      }
+    }else{
+      if(root.right == null){
+        root.right = node;
+      }else{
+        this.insertNode(root.right, node);
+      }
+    }
+    return this.size++
+  }
+}
+
+let tree = new BinarySearchTree();
+tree.insert(10)
+tree.insert(2)
+tree.insert(3)
+tree.insert(4)
+tree.insert(5)
+console.log(tree.isEmpty())

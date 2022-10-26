@@ -88,9 +88,4 @@ class QueueLinkedList{
   
 }
 
-let list = new QueueLinkedList();
-list.append(1);
-list.append(2);
-list.append(3);
-list.prepend(0);
-list.reverse();
+module.exports = QueueLinkedList;
