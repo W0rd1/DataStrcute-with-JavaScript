@@ -43,7 +43,7 @@ class QueueLinkedList{
     let value = this.head.data;
     this.head = this.head.next;
     this.size--;
-    return console.log(value);
+    return value;
   }
   removeFromEnd(){
     if(this.isEmpty()){return console.log('Queue is empty')}
