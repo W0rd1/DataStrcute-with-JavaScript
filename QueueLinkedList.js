@@ -1,106 +1,96 @@
-class Node {
-    constructor(value) {
-      this.value = value;
-      this.next = null;
+class Node{
+  constructor(value){
+    this.data = value;
+    this.next = null;
+    this.previous = null;
+  }
+}
+
+class QueueLinkedList{
+  constructor(){
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+  }
+  isEmpty(){return this.size === 0}
+  getSize(){return this.size}
+  prepend(value){
+    let node = new Node(value);
+    if(this.isEmpty()){
+      this.head = node;
+      this.tail = node;
+    }else{
+      node.next = this.head;
+      this.head.previous = node;
+      this.head = node;
+    }
+    return this.size++;
+  }
+  append(value){
+    let node = new Node(value);
+    if(this.isEmpty()){
+      this.head = node;
+      this.tail = node;
+    }else{
+      node.previous = this.tail;
+      this.tail.next = node;
+      this.tail = node;
+    }
+    return this.size++;
+  }
+  removeFromFront(){
+    if(this.isEmpty()){return console.log('Queue is empty')}
+    let value = this.head.data;
+    this.head = this.head.next;
+    this.size--;
+    return console.log(value);
+  }
+  removeFromEnd(){
+    if(this.isEmpty()){return console.log('Queue is empty')}
+    let value = this.tail.data;
+    if(this.tail.previous){
+      this.tail = this.tail.previous;
+      this.tail.next = null;
+    }else{
+      this.size--;
+      return console.log(value)
     }
   }
+  reverse(){return console.log(this.reverseQueue(this.tail))}
   
-  class LinkedList {
-    constructor() {
-      this.head = null;
-      this.tail = null;
-      this.size = 0;
-    }
-  
-    isEmpty() {
-      return this.size === 0;
-    }
-  
-    getSize() {
-      return this.size;
-    }
-  
-    prepend(value) {
-      const node = new Node(value);
-      if (this.isEmpty()) {
-        this.head = node;
-        this.tail = node;
-      } else {
-        node.next = this.head;
-        this.head = node;
+  reverseQueue(node){
+    let counter = 0;
+    let Queue = {};
+    if(node){
+      while(counter < this.size){
+        Queue[counter] = node.data;
+        node = node.previous;
+        counter++;
       }
-      this.size++;
+      this.reverseQueue(node);
     }
-  
-    append(value) {
-      const node = new Node(value);
-      if (this.isEmpty()) {
-        this.head = node;
-        this.tail = node;
-      } else {
-        this.tail.next = node;
-        this.tail = node;
+    return console.log(Queue);
+  }
+  print(){return console.log(this.printQueue(this.head))}
+  printQueue(node){
+    let counter = 0;
+    let Queue = {};
+    if(node){
+      while(counter < this.size){
+        Queue[counter] = node.data;
+        node = node.next;
+        counter++;
       }
-      this.size++;
+      this.printQueue(node);
     }
-  
-    removeFromFront() {
-      if (this.isEmpty()) {
-        return null;
-      }
-      const value = this.head.value;
-      this.head = this.head.next;
-      this.size--;
-      return value;
-    }
-  
-    removeFromEnd() {
-      if (this.isEmpty()) {
-        return null;
-      }
-      const value = this.tail.value;
-      if (this.size === 1) {
-        this.head = null;
-        this.tail = null;
-      } else {
-        let prev = this.head;
-        while (prev.next !== this.tail) {
-          prev = prev.next;
-        }
-        prev.next = null;
-        this.tail = prev;
-      }
-      this.size--;
-      return value;
-    }
-  
-    reverse() {
-      let current = this.head;
-      let prev = null;
-      let next = null;
-      while (current) {
-        next = current.next;
-        current.next = prev;
-        prev = current;
-        current = next;
-      }
-      this.tail = this.head;
-      this.head = prev;
-    }
-  
-    print() {
-      if (this.isEmpty()) {
-        console.log("List is empty");
-      } else {
-        let curr = this.head;
-        let list = "";
-        while (curr) {
-          list += `${curr.value}->`;
-          curr = curr.next;
-        }
-        console.log(list);
-      }
-    }
+    return console.log(Queue);
   }
   
-  module.exports = LinkedList;
+}
+
+let list = new QueueLinkedList();
+list.append(1);
+list.append(2);
+list.append(3);
+list.prepend(0);
+list.reverse();
