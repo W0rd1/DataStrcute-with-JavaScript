@@ -65,7 +65,7 @@ class BinarySearchTree{
   // Min(root)
   // Max(root)
   // delete(root, value)
-  // All functions going to be available as shortly
+  // All functions going to be available shortly
 }
 
 const bst = new BinarySearchTree();
